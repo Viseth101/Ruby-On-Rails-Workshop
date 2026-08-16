@@ -1,0 +1,21 @@
+<section class="mb-6 flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Todo Board</h1>
+    <p class="mt-2 text-sm text-slate-600 sm:text-base">Keep it simple, ship it done.</p>
+  </div>
+  <%= link_to "New task", new_task_path, class: "inline-flex items-center rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white shadow hover:bg-teal-700" %>
+</section>
+
+<%= render "tasks/counters" %>
+
+<section class="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur">
+  <% if @tasks.any? %>
+    <ul class="space-y-3">
+      <% @tasks.each do |task| %>
+        <%= render "task", task: task %>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="text-sm text-slate-600">No tasks yet. Add your first one.</p>
+  <% end %>
+</section>

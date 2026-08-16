@@ -1,0 +1,22 @@
+<section class="mb-6 flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl"><%= @task.title %></h1>
+    <% if @task.completed? %>
+      <p class="mt-2 text-sm text-emerald-700">Status: Done</p>
+    <% else %>
+      <p class="mt-2 text-sm text-amber-700">Status: Pending</p>
+    <% end %>
+  </div>
+  <div class="flex flex-wrap items-center gap-2">
+    <%= link_to "Back", tasks_path, class: "rounded-lg bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-300" %>
+    <%= link_to "Edit", edit_task_path(@task), class: "rounded-lg bg-cyan-100 px-4 py-2 text-sm font-semibold text-cyan-900 hover:bg-cyan-200" %>
+  </div>
+</section>
+
+<section class="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur">
+  <p class="text-sm text-slate-600">Created <%= time_ago_in_words(@task.created_at) %> ago</p>
+
+  <div class="mt-4 flex flex-wrap items-center gap-2">
+    <%= button_to "Delete task", task_path(@task), method: :delete, class: "rounded-lg bg-rose-600 px-4 py-2 text-sm font-semibold text-white hover:bg-rose-700", form: { class: "inline", data: { turbo_confirm: "Delete this task?" } } %>
+  </div>
+</section>

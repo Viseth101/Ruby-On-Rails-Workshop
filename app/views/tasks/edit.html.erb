@@ -1,0 +1,11 @@
+<section class="mb-6 flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <h1 class="text-3xl font-bold tracking-tight sm:text-4xl">Edit Task</h1>
+    <p class="mt-2 text-sm text-slate-600 sm:text-base">Tune title or completion state.</p>
+  </div>
+  <%= link_to "Back", task_path(@task), class: "rounded-lg bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-300" %>
+</section>
+
+<section class="rounded-2xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur">
+  <%= render "form", task: @task %>
+</section>

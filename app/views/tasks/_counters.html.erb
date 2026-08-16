@@ -1,0 +1,36 @@
+<%= turbo_frame_tag "task_counters" do %>
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3 mb-6">
+    <!-- Card 1: Total -->
+    <div class="relative overflow-hidden rounded-2xl border border-slate-200 bg-white/80 p-5 shadow-md backdrop-blur transition-all duration-300 hover:shadow-lg">
+      <div class="absolute -right-4 -top-4 flex h-16 w-16 items-center justify-center rounded-full bg-slate-50">
+        <svg class="h-8 w-8 text-slate-300" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 12.408-.07 1.023m0-1.023 2.62h2.62m0 0-.07 1.023m-2.55-1.023H10.5m-5.25-.75h1.5a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-1.5A2.25 2.25 0 0 0 3 6v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+        </svg>
+      </div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-slate-500">Total Tasks</p>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-slate-900"><%= Task.count %></p>
+    </div>
+
+    <!-- Card 2: Completed -->
+    <div class="relative overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/40 p-5 shadow-md backdrop-blur transition-all duration-300 hover:shadow-lg">
+      <div class="absolute -right-4 -top-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50">
+        <svg class="h-8 w-8 text-emerald-200" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+      </div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-emerald-600">Completed</p>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-emerald-700"><%= Task.completed.count %></p>
+    </div>
+
+    <!-- Card 3: Pending -->
+    <div class="relative overflow-hidden rounded-2xl border border-amber-100 bg-amber-50/40 p-5 shadow-md backdrop-blur transition-all duration-300 hover:shadow-lg">
+      <div class="absolute -right-4 -top-4 flex h-16 w-16 items-center justify-center rounded-full bg-amber-50">
+        <svg class="h-8 w-8 text-amber-200" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+        </svg>
+      </div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-amber-600">Pending</p>
+      <p class="mt-2 text-3xl font-bold tracking-tight text-amber-700"><%= Task.pending.count %></p>
+    </div>
+  </div>
+<% end %>

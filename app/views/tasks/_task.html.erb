@@ -1,0 +1,29 @@
+<%# This partial receives local variable task from index: render "task", task: task %>
+<%= turbo_frame_tag dom_id(task) do %>
+  <%# dom_id(task) becomes an id like "task_3", used by Turbo Frame/Stream updates. %>
+  <li class="flex flex-col gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+    <div>
+      <%= link_to task.title, task_path(task), class: "text-base font-semibold text-slate-900 hover:underline", data: { turbo_frame: "_top" } %>
+      <div class="text-xs text-slate-500">Updated <%= time_ago_in_words(task.updated_at) %> ago</div>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-2">
+      <% if task.completed? %>
+        <span class="rounded-full bg-emerald-100 px-2.5 py-1 text-xs font-semibold text-emerald-800">Done</span>
+        <%= form_with model: task, method: :patch, class: "inline" do |form| %>
+          <%= form.hidden_field :completed, value: false %>
+          <%= form.submit "Mark pending", class: "rounded-lg bg-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-800 hover:bg-slate-300" %>
+        <% end %>
+      <% else %>
+        <span class="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800">Pending</span>
+        <%= form_with model: task, method: :patch, class: "inline" do |form| %>
+          <%= form.hidden_field :completed, value: true %>
+          <%= form.submit "Mark done", class: "rounded-lg bg-teal-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-teal-700" %>
+        <% end %>
+      <% end %>
+
+      <%= link_to "Edit", edit_task_path(task), class: "rounded-lg bg-cyan-100 px-3 py-1.5 text-xs font-semibold text-cyan-900 hover:bg-cyan-200", data: { turbo_frame: "_top" } %>
+      <%= button_to "Delete", task_path(task), method: :delete, class: "rounded-lg bg-rose-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-rose-700", form: { class: "inline", data: { turbo_confirm: "Delete this task?" } } %>
+    </div>
+  </li>
+<% end %>

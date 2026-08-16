@@ -1,0 +1,27 @@
+<%= form_with(model: task, class: "grid gap-4") do |form| %>
+  <% if task.errors.any? %>
+    <div class="rounded-lg border border-rose-300 bg-rose-100 px-4 py-3 text-sm text-rose-900">
+      <p class="font-semibold"><%= pluralize(task.errors.count, "error") %> prevented this task from being saved:</p>
+      <ul class="mt-2 list-inside list-disc">
+        <% task.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, class: "mb-1 block text-sm font-semibold text-slate-800" %>
+    <%= form.text_field :title, placeholder: "Write the task title", class: "w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-200" %>
+  </div>
+
+  <label class="inline-flex items-center gap-2 text-sm text-slate-700">
+    <%= form.check_box :completed, class: "h-4 w-4 rounded border-slate-300 text-teal-600 focus:ring-teal-500" %>
+    Mark task as completed
+  </label>
+
+  <div class="flex flex-wrap items-center gap-2">
+    <%= form.submit class: "rounded-lg bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700" %>
+    <%= link_to "Cancel", (task.persisted? ? task_path(task) : tasks_path), class: "rounded-lg bg-slate-200 px-4 py-2 text-sm font-semibold text-slate-800 hover:bg-slate-300" %>
+  </div>
+<% end %>
